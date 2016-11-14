@@ -15,6 +15,7 @@ class TableViewController: UITableViewController, UISearchBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.delegate = self
+        searchBar.showsCancelButton = true
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -38,6 +39,11 @@ class TableViewController: UITableViewController, UISearchBarDelegate {
                 NSLog("Search for posts in subreddit '\(term)' was unsuccessful. Error: \(error)")
             }
         }
+    }
+
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        PostsController.sharedInstance.clearSearch()
+        tableView.reloadData()
     }
 
     // MARK: - Table view data source
